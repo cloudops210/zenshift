@@ -70,8 +70,8 @@ router.post('/register', register);
 router.post('/login', login);
 
 // Google authentication routes
-// router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
-// router.get("/google/callback", passport.authenticate("google", { session: false }), socialAuthCallback);
+router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+router.get("/google/callback", passport.authenticate("google", { session: false }), socialAuthCallback);
 
 // Facebook authentication routes
 // router.get("/facebook", passport.authenticate("facebook", { scope: ["email"] }));

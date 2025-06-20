@@ -1,7 +1,5 @@
 import express from 'express';
 import cors from 'cors';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
 import fileUpload from 'express-fileupload';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -16,17 +14,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-app.use(helmet());
+app.options("*", cors());
 
 const staticPath = path.join(__dirname, 'static');
 app.use(express.static(staticPath));
-
-app.use(rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-    standardHeaders: true,
-    legacyHeaders: false,
-}));
 
 app.use(fileUpload({
     createParentPath: true,

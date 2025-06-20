@@ -2,6 +2,13 @@ import mongoose, { Document, Schema } from 'mongoose';
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
+export interface ISubscription {
+    plan: 'basic' | 'premium' | null;
+    status: 'active' | 'inactive' | 'canceled' | null;
+    stripeCustomerId?: string;
+    stripeSubscriptionId?: string;
+}
+
 export interface IUser extends Document {
     name: string;
     email: string;
@@ -20,7 +27,15 @@ export interface IUser extends Document {
     resetPasswordUrl: (token: string) => string;
     createdAt: Date;
     updatedAt: Date;
+    subscription: ISubscription;
 }
+
+const SubscriptionSchema: Schema = new Schema<ISubscription>({
+    plan: { type: String, enum: ['basic', 'premium', null], default: null },
+    status: { type: String, enum: ['active', 'inactive', 'canceled', null], default: null },
+    stripeCustomerId: { type: String },
+    stripeSubscriptionId: { type: String },
+}, { _id: false });
 
 const UserSchema: Schema = new Schema<IUser>(
     {
@@ -63,6 +78,7 @@ const UserSchema: Schema = new Schema<IUser>(
         resetPasswordExpire: Date,
         verifyEmailToken: String,
         verifyEmailExpire: Date,
+        subscription: { type: SubscriptionSchema, default: () => ({}) },
     },
     { timestamps: true }
 );
