@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
-import morgan from 'morgan';
 import fileUpload from 'express-fileupload';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -18,7 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(helmet());
-app.use(morgan('dev'));
 
 const staticPath = path.join(__dirname, 'static');
 app.use(express.static(staticPath));
