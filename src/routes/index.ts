@@ -7,6 +7,7 @@ import blogpostRouter from './blogpost.routes';
 import reviewRouter from './review.routes';
 import usersRouter from './user.routes';
 import journalRouter from './journal.routes';
+import stripeRouter from './stripe.routes';
 
 const router = express.Router();
 
@@ -18,5 +19,6 @@ router.use("/reviews", reviewRouter);
 router.use("/blogposts", blogpostRouter);
 router.use("/users", usersRouter);
 router.use("/journals", journalRouter);
+router.use("/subscription", stripeRouter);
 
 export default router;

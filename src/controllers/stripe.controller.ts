@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import Stripe from 'stripe';
-import User, { IUser } from '../models/User';
+import User from '../models/User';
 
 function cleanEnvVar(val: string | undefined) {
   if (!val) return val;
@@ -20,7 +20,7 @@ if (!STRIPE_WEBHOOK_SECRET) {
 }
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2025-03-31.basil' });
 
-const FRONTEND_URL = cleanEnvVar(process.env.FRONTEND_URL) || 'http://localhost:3000';
+const FRONTEND_URL = '';
 
 function ensureAbsoluteUrl(url: string) {
   if (!/^https?:\/\//.test(url)) {

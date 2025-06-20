@@ -37,7 +37,6 @@ export const register = async (req: Request, res: Response) => {
     try {
         const { error } = registerSchema.validate(req.body);
         if (error) return res.status(400).json({ error: error.details[0].message });
-
         const { name, email, password } = req.body;
 
         const existingUser = await User.findOne({ email });
@@ -87,6 +86,7 @@ export const login = async (req: Request, res: Response) => {
             message: 'Login successful',
             token,
             user: {
+                id: user._id,
                 name: user.name,
                 email: user.email,
             },
@@ -127,7 +127,7 @@ export const verifyEmail = async (req: Request, res: Response) => {
         res.status(200).json({
             message: 'Email verification successful',
             user: {
-                id: user.id,
+                id: user._id,
                 email: user.email,
                 isEmailVerified: user.isEmailVerified,
             }
