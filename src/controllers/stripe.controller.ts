@@ -20,7 +20,7 @@ if (!STRIPE_WEBHOOK_SECRET) {
 }
 const stripe = new Stripe(STRIPE_SECRET_KEY, { apiVersion: '2025-03-31.basil' });
 
-const FRONTEND_URL = '';
+const FRONTEND_URL = 'https://zenshift.com';
 
 function ensureAbsoluteUrl(url: string) {
   if (!/^https?:\/\//.test(url)) {
